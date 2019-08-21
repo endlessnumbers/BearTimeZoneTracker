@@ -116,7 +116,7 @@
       function setClocks() {
           setTime(peruClock, -5);
           setTime(sanFranClock, -7);
-          setTime(poohClock, 0);
+          setTime(poohClock, 1);
       }
 
       function setTime(e, hourOffset) {
@@ -125,8 +125,6 @@
           const hourHand = e.querySelectorAll('.hour-hand');
 
           const now = new Date();
-          if (now.getTimezoneOffset() < 0)  //DST adjustment
-              hourOffset--;
 
           const seconds = now.getSeconds();
           const secondsDegrees = ((seconds / 60) * 360) + 90;
@@ -143,7 +141,7 @@
           const minsDegrees = ((mins / 60) * 360) + 90;
           minHand.forEach(e => rotateHand(e, minsDegrees));
 
-          let hourCalc = now.getHours() + hourOffset;
+          let hourCalc = now.getUTCHours() + hourOffset;
           const hours = (hourCalc) < 0 ? hourCalc % 12 : hourCalc;  // if less than zero calculate 12 hour time
           const hoursDegrees = ((hours / 12) * 360) + 90;
           hourHand.forEach(e => rotateHand(e, hoursDegrees));
