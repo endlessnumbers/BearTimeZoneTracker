@@ -116,7 +116,7 @@
       function setClocks() {
           setTime(peruClock, -5);
           setTime(sanFranClock, -7);
-          setTime(poohClock, 1);
+          setTime(poohClock, new Date().getTimezoneOffset() < 0 ? 1 : 0);
       }
 
       function setTime(e, hourOffset) {
